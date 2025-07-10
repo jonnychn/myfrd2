@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe - Personal Profile</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-image {
+            margin-bottom: 20px;
+        }
+
+        .profile-image img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #8b5cf6;
+            font-weight: 500;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 16px;
+            color: #6b7280;
+            max-width: 300px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Tray Sections */
+        .tray-section {
+            margin-bottom: 15px;
+        }
+
+        .tray {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tray:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Social Links */
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .social-link i {
+            font-size: 20px;
+            margin-right: 15px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .social-link span {
+            font-size: 16px;
+        }
+
+        /* Social Link Colors */
+        .linkedin {
+            background: linear-gradient(135deg, #0077b5, #005885);
+            color: white;
+        }
+
+        .instagram {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .website {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .resume {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        /* Contact Tray */
+        .contact-tray {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #1f2937;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .contact-link:last-child {
+            border-bottom: none;
+        }
+
+        .contact-link:hover {
+            background-color: #f9fafb;
+        }
+
+        .contact-link i {
+            font-size: 18px;
+            margin-right: 15px;
+            width: 24px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .contact-link span {
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .portfolio-section h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1f2937;
+        }
+
+        /* Carousel */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 15px;
+            padding: 0 10px;
+        }
+
+        .carousel-item {
+            flex: 0 0 calc(100% - 20px);
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-item a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 20px 15px 15px;
+            text-align: center;
+        }
+
+        .overlay span {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        /* Carousel Navigation */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 10px;
+        }
+
+        .carousel-btn.next {
+            right: 10px;
+        }
+
+        .carousel-btn i {
+            color: #1f2937;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .profile-section {
+                padding: 25px 15px;
+            }
+            
+            .profile-image img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .name {
+                font-size: 24px;
+            }
+            
+            .bio {
+                font-size: 15px;
+            }
+            
+            .social-link {
+                padding: 16px 18px;
+            }
+            
+            .social-link i {
+                font-size: 18px;
+            }
+            
+            .social-link span {
+                font-size: 15px;
+            }
+            
+            .carousel-btn {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .carousel-btn i {
+                font-size: 12px;
+            }
+        }
+
+        /* Smooth scrolling for better UX */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Focus states for accessibility */
+        .social-link:focus,
+        .contact-link:focus,
+        .carousel-btn:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+
+        /* Loading animation for images */
+        img {
+            transition: opacity 0.3s ease;
+        }
+
+        img[src*="placeholder"] {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!--  
+    ========================================
+    CUSTOMIZATION SECTION - UPDATE YOUR INFO HERE
+    ========================================
+    
+    INSTRUCTIONS:
+    1. Replace all placeholder text below with your actual information
+    2. For images: Upload your images to a hosting service (like imgur.com, cloudinary.com, or your website) and replace the URLs
+    3. For resume: Upload your PDF to a hosting service and replace the URL
+    4. Save the file and upload to your web hosting service
+    
+    PROFILE IMAGE:
+    - Recommended size: 150x150 pixels
+    - Format: JPG, PNG, or WebP
+    - Upload to: imgur.com, cloudinary.com, or your website
+    - Replace the URL below
+    
+    PORTFOLIO IMAGES:
+    - Recommended size: 300x200 pixels
+    - Format: JPG, PNG, or WebP
+    - Upload to: imgur.com, cloudinary.com, or your website
+    - Replace the URLs below
+    
+    RESUME:
+    - Format: PDF recommended
+    - Upload to: Google Drive (make public), Dropbox, or your website
+    - Replace the URL below
+    -->
+    
+    <!-- YOUR PERSONAL INFORMATION - UPDATE THESE VALUES -->
+    <script>
+        // ===== PERSONAL INFO =====
+        const PERSONAL_INFO = {
+            // Your name (appears in title and profile)
+            name: "Edith Yeung",
+            
+            // Your tagline (7 words or less)
+            tagline: "Early-stage venture investor @ Race Capital",
+            
+            // Your bio (30 words or less including spaces)
+            bio: "Edith Yeung is a general partner at Race Capital, a seed-stage VC firm in Silicon Valley, technology executive, and creator of the China Internet Report, and Silicon News.",
+            
+            // Your profile image URL
+            profileImage: "https://i.imgur.com/ipvhshD.jpeg",
+            
+            // Your resume PDF URL
+            resumeUrl: "https://www.edith.co/"
+        };
+        
+        // ===== SOCIAL MEDIA LINKS =====
+        const SOCIAL_LINKS = {
+            linkedin: "https://www.linkedin.com/in/edithyeung/",
+            instagram: "https://www.instagram.com/edithyeung/",
+            website: "https://www.edith.co/about"
+        };
+        
+        // ===== CONTACT INFORMATION =====
+        const CONTACT_INFO = {
+            email: "edithyeung@test.com",
+            phone: "+1 (510) 123-4567"
+        };
+        
+        // ===== PORTFOLIO PROJECTS =====
+        const PORTFOLIO_PROJECTS = [
+            {
+                title: "Project 1",
+                image: "https://via.placeholder.com/300x200/EC4899/FFFFFF?text=Project+3",
+                url: "https://project3.com"
+            },
+            {
+                title: "Project 2", 
+                image: "https://via.placeholder.com/300x200/EC4899/FFFFFF?text=Project+3",
+                url: "https://project3.com"
+            },
+            {
+                title: "Project 3",
+                image: "https://via.placeholder.com/300x200/EC4899/FFFFFF?text=Project+3", 
+                url: "https://project3.com"
+            },
+            {
+                title: "Project 4",
+                image: "https://via.placeholder.com/300x200/F59E0B/FFFFFF?text=Project+4",
+                url: "https://project4.com"
+            },
+            {
+                title: "Project 5",
+                image: "https://via.placeholder.com/300x200/10B981/FFFFFF?text=Project+5",
+                url: "https://project5.com"
+            },
+            {
+                title: "Project 6",
+                image: "https://via.placeholder.com/300x200/EF4444/FFFFFF?text=Project+6",
+                url: "https://project6.com"
+            }
+        ];
+        
+        // Function to update all content on page load
+        function updateContent() {
+            // Update page title
+            document.title = PERSONAL_INFO.name + " - Personal Profile";
+            
+            // Update profile section
+            document.querySelector('.name').textContent = PERSONAL_INFO.name;
+            document.querySelector('.tagline').textContent = PERSONAL_INFO.tagline;
+            document.querySelector('.bio').textContent = PERSONAL_INFO.bio;
+            document.querySelector('.profile-image img').src = PERSONAL_INFO.profileImage;
+            document.querySelector('.profile-image img').alt = PERSONAL_INFO.name;
+            
+            // Update social links
+            document.querySelector('.social-link.linkedin').href = SOCIAL_LINKS.linkedin;
+            document.querySelector('.social-link.instagram').href = SOCIAL_LINKS.instagram;
+            document.querySelector('.social-link.website').href = SOCIAL_LINKS.website;
+            
+            // Update contact info
+            document.querySelector('.contact-link.email').href = 'mailto:' + CONTACT_INFO.email;
+            document.querySelector('.contact-link.email span').textContent = CONTACT_INFO.email;
+            document.querySelector('.contact-link.phone').href = 'tel:' + CONTACT_INFO.phone;
+            document.querySelector('.contact-link.phone span').textContent = CONTACT_INFO.phone;
+            
+            // Update resume link
+            document.querySelector('.social-link.resume').href = PERSONAL_INFO.resumeUrl;
+            
+            // Update portfolio projects
+            const carouselTrack = document.querySelector('.carousel-track');
+            carouselTrack.innerHTML = '';
+            
+            PORTFOLIO_PROJECTS.forEach(project => {
+                const projectHTML = `
+                    <div class="carousel-item">
+                        <a href="${project.url}" target="_blank">
+                            <img src="${project.image}" alt="${project.title}">
+                            <div class="overlay">
+                                <span>${project.title}</span>
+                            </div>
+                        </a>
+                    </div>
+                `;
+                carouselTrack.innerHTML += projectHTML;
+            });
+        }
+    </script>
+
+    <div class="container">
+        <!-- Header Section with Profile -->
+        <header class="profile-section">
+            <div class="profile-image">
+                <img src="https://i.imgur.com/ipvhshD.jpeg" alt="Edith Yeung">
+            </div>
+            <h1 class="name">Edith Yeung</h1>
+            <p class="tagline">Early-stage venture investor @ Race Capital</p>
+            <p class="bio">
+                Edith Yeung is a general partner at Race Capital, a seed-stage VC firm in Silicon Valley, technology executive, and creator of the China Internet Report, and Silicon News.
+            </p>
+        </header>
+
+        <!-- Social Links Tray -->
+        <div class="tray-section">
+            <div class="tray">
+                <a href="https://www.linkedin.com/in/edithyeung/" class="social-link linkedin" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn @ Edith Yeung</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Instagram Tray -->
+        <div class="tray-section">
+            <div class="tray">
+                <a href="https://www.instagram.com/edithyeung/" class="social-link instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram @edithyeung</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Contact Info Tray -->
+        <div class="tray-section">
+            <div class="tray contact-tray">
+                <a href="mailto:edith.yeung@email.com" class="contact-link email">
+                    <i class="fas fa-envelope"></i>
+                    <span>edith.yeung@email.com</span>
+                </a>
+                <a href="tel:+1234567890" class="contact-link phone">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 (510) 123-4567</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Website Tray -->
+        <div class="tray-section">
+            <div class="tray">
+                <a href="https://www.edith.co/about" class="social-link website" target="_blank">
+                    <i class="fas fa-globe"></i>
+                    <span>Threads</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Resume Download Tray -->
+        <div class="tray-section">
+            <div class="tray">
+                <a href="" class="social-link resume" download>
+                    <i class="fas fa-download"></i>
+                    <span>My Portfolio</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Work Portfolio Carousel -->
+        <div class="portfolio-section">
+            <h2>My Work</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- Work Image 1 -->
+                    <div class="carousel-item">
+                        <a href="https://project1.com" target="_blank">
+                            <img src="https://via.placeholder.com/300x200/6366F1/FFFFFF?text=Project+1" alt="Project 1">
+                            <div class="overlay">
+                                <span>Project 1</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Work Image 2 -->
+                    <div class="carousel-item">
+                        <a href="https://project2.com" target="_blank">
+                            <img src="https://via.placeholder.com/300x200/8B5CF6/FFFFFF?text=Project+2" alt="Project 2">
+                            <div class="overlay">
+                                <span>Project 2</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Work Image 3 -->
+                    <div class="carousel-item">
+                        <a href="https://project3.com" target="_blank">
+                            <img src="https://via.placeholder.com/300x200/EC4899/FFFFFF?text=Project+3" alt="Project 3">
+                            <div class="overlay">
+                                <span>Project 3</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Work Image 4 -->
+                    <div class="carousel-item">
+                        <a href="https://project4.com" target="_blank">
+                            <img src="https://via.placeholder.com/300x200/F59E0B/FFFFFF?text=Project+4" alt="Project 4">
+                            <div class="overlay">
+                                <span>Project 4</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Work Image 5 -->
+                    <div class="carousel-item">
+                        <a href="https://project5.com" target="_blank">
+                            <img src="https://via.placeholder.com/300x200/10B981/FFFFFF?text=Project+5" alt="Project 5">
+                            <div class="overlay">
+                                <span>Project 5</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Work Image 6 -->
+                    <div class="carousel-item">
+                        <a href="https://project6.com" target="_blank">
+                            <img src="https://via.placeholder.com/300x200/EF4444/FFFFFF?text=Project+6" alt="Project 6">
+                            <div class="overlay">
+                                <span>Project 6</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Carousel Navigation -->
+                <button class="carousel-btn prev" onclick="moveCarousel('prev')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" onclick="moveCarousel('next')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const carouselTrack = document.querySelector('.carousel-track');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const totalSlides = carouselItems.length;
+
+        // Initialize carousel
+        function initCarousel() {
+            if (carouselTrack && carouselItems.length > 0) {
+                updateCarouselButtons();
+            }
+        }
+
+        // Move carousel to specific slide
+        function moveCarousel(direction) {
+            if (direction === 'next') {
+                currentSlide = (currentSlide + 1) % totalSlides;
+            } else if (direction === 'prev') {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            } else {
+                // For direct slide navigation
+                currentSlide = direction;
+            }
+            
+            updateCarouselPosition();
+            updateCarouselButtons();
+        }
+
+        // Update carousel position
+        function updateCarouselPosition() {
+            if (carouselTrack) {
+                const slideWidth = carouselItems[0].offsetWidth + 15; // Include gap
+                const translateX = -currentSlide * slideWidth;
+                carouselTrack.style.transform = `translateX(${translateX}px)`;
+            }
+        }
+
+        // Update carousel navigation buttons
+        function updateCarouselButtons() {
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            
+            if (prevBtn && nextBtn) {
+                // Show/hide buttons based on current slide
+                prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+                nextBtn.style.opacity = currentSlide === totalSlides - 1 ? '0.5' : '1';
+                
+                // Disable buttons at boundaries
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+        }
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+
+        function handleTouchStart(e) {
+            startX = e.touches[0].clientX;
+        }
+
+        function handleTouchMove(e) {
+            endX = e.touches[0].clientX;
+        }
+
+        function handleTouchEnd() {
+            const swipeThreshold = 50;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    moveCarousel('next');
+                } else {
+                    // Swipe right - previous slide
+                    moveCarousel('prev');
+                }
+            }
+        }
+
+        // Add touch event listeners
+        function addTouchSupport() {
+            const carouselContainer = document.querySelector('.carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+                carouselContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+                carouselContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+            }
+        }
+
+        // Auto-advance carousel (optional)
+        let autoAdvanceInterval;
+
+        function startAutoAdvance() {
+            if (totalSlides > 1) {
+                autoAdvanceInterval = setInterval(() => {
+                    moveCarousel('next');
+                }, 5000); // Change slide every 5 seconds
+            }
+        }
+
+        function stopAutoAdvance() {
+            if (autoAdvanceInterval) {
+                clearInterval(autoAdvanceInterval);
+            }
+        }
+
+        // Pause auto-advance on hover
+        function addCarouselHoverEvents() {
+            const carouselContainer = document.querySelector('.carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', stopAutoAdvance);
+                carouselContainer.addEventListener('mouseleave', startAutoAdvance);
+            }
+        }
+
+        // Add loading states for images
+        function addImageLoadingStates() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('load', () => {
+                    img.style.opacity = '1';
+                });
+                
+                img.addEventListener('error', () => {
+                    img.style.opacity = '0.5';
+                    console.warn('Failed to load image:', img.src);
+                });
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update content from customization section
+            updateContent();
+            
+            // Re-initialize carousel after content update
+            setTimeout(() => {
+                initCarousel();
+                addTouchSupport();
+                addCarouselHoverEvents();
+                addImageLoadingStates();
+                
+                // Start auto-advance after a delay
+                setTimeout(startAutoAdvance, 2000);
+            }, 100);
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                updateCarouselPosition();
+            });
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            const carouselContainer = document.querySelector('.carousel-container');
+            if (carouselContainer && document.activeElement.closest('.carousel-container')) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    moveCarousel('prev');
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    moveCarousel('next');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
